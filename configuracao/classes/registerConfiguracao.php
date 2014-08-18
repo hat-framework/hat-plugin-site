@@ -78,7 +78,7 @@ class registerConfiguracao extends classes\Classes\Object{
             case 'plugin': /*vazio*/
             case 'template':
                 $class  = "{$plugin}{$sufixo}";
-                $file = TEMPLATES . "$plugin/Config/{$class}.php";
+                $file = \classes\Classes\Registered::getTemplateLocation($plugin, true) . "/Config/{$class}.php";
                 break;          
         }
         getTrueDir($file);
