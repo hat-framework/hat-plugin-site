@@ -1,0 +1,9 @@
+<?php
+$this->gui->opendiv('site_configuracao', 'span10');
+foreach($configuracoes as $gname => $confgrupo){
+    $this->gui->subtitle($gname);
+    foreach($confgrupo as $nm => $link){
+        $this->gui->infotitle("<a href='$link'>$nm</a>");
+    }
+}
+$this->gui->closediv();

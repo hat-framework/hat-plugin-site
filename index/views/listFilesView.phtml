@@ -1,0 +1,16 @@
+<style>
+    .treeview ul{
+        background-color: #e2e2e2!important;
+    }
+</style>
+
+<div class='span3 border' id="divmenu">
+    <h4><?php echo $title; ?></h4>
+    <?php if($dropUrl != "") echo $this->Html->MakeLink($dropUrl, "Apagar Arquivo", 'btn btn-error'); ?>
+    <?php $this->LoadClassFromPlugin("site/index/indexFileManagerComponent", 'ifmc')->showMenu($files, $base_url);?>
+</div>
+<div class='logcontent span9 pull-right'>
+    <?php if($filesrc !== ""){
+     echo nl2br(file_get_contents($filesrc));
+    }?>
+</div>

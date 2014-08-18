@@ -1,0 +1,12 @@
+<?php 
+
+if(!empty($form)){
+    $this->LoadResource('formulario', 'form');
+    $this->form->setModel("configuracao$cod");
+    $this->form->NewForm($form, $values = array(), array(), true, LINK."/configure/$cod");
+}else{
+    echo "<h1>Arquivo de configuração não existe</h1>";
+    echo "<p>O arquivo que você procura não existe</p>";
+}
+
+?>
