@@ -111,9 +111,11 @@ class conffileRegister extends classes\Classes\Object{
         $subdir   = array_shift($exp);
         //$filename = end($exp);
         $location = DIR_CONFIG_SUBDOMAIN . $dados['type']."/";
+        getTrueDir($location);
         $this->LoadResource('files/dir', 'dobj');
+        //die($location);
         if(!$this->dobj->create($location, $subdir, 0777)){
-            die($this->dobj->getErrorMessage());
+            die(__CLASS__. "<hr/>".$this->dobj->getErrorMessage());
             $this->setMessages($this->dobj->getMessages());
             return false;
         }

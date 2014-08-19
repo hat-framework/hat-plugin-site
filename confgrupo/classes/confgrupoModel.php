@@ -43,9 +43,10 @@ class site_confgrupoModel extends \classes\Model\Model{
     
     public function findNewGroups(){
         $this->LoadClassFromPlugin('site/configuracao/registerConfiguracao', 'rconf');
-        if(!$this->findSiteConfiguration())      return false;
-        if(!$this->findResourceConfigurations()) return false;
-        return true;
+        $bool = true;
+        $bool = $bool & $this->findSiteConfiguration();
+        $bool = $bool & $this->findResourceConfigurations();
+        return $bool;
     }
     
     private function findSiteConfiguration(){
