@@ -60,13 +60,13 @@ class site_confgrupoModel extends \classes\Model\Model{
     private function findResourceConfigurations(){
         $this->LoadResource('files/dir', 'dir');
         $resources = classes\Classes\Registered::getAllResourcesLocation(true);
-        foreach($resources as $res){
+        foreach($resources as $name => $res){
             $files   = $this->dir->getArquivos("$res/src/config/");
             if(empty($files)) continue;
             foreach($files as $fl){
                 if(false === strstr($fl, 'Configurations')){continue;}
                 $f = str_replace(array('.php', 'Configurations'), '', $fl);
-                if(!$this->rconf->register('resource', "$res/$f")){
+                if(!$this->rconf->register('resource', $name)){
                     $this->setMessages($this->rconf->getMessages());
                     return false;
                 }
