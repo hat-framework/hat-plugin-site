@@ -43,15 +43,15 @@ class conffileRegister extends classes\Classes\Object{
         if($cod_conffile === false) return false;
         
         //insere as entradas das configurações
+        //print_rh($configs);
         foreach($configs as &$conf){
             if(!$this->cf->insertData($conf, $cod_conffile)){
                 $this->setMessages($this->cf->getMessages());
                 return false;
             }
         }
-        if(!$this->createFile($cod_conffile, $configs)) return false;
-        
-        
+        //print_rhd($configs);
+        if(!$this->createFile($cod_conffile, $configs)) {return false;}
         return true;
     }
     

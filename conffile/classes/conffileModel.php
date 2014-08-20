@@ -49,19 +49,22 @@ class site_conffileModel extends \classes\Model\Model{
             $this->LoadModel('site/configuracao', 'sconf');
             $this->db->Join($this->sconf->getTable(),$this->conf->getTable());
             $var = $this->sconf->selecionar(
-                    array('cod_conf', 'valor as value', 'type'), 
+                    array('cod_conf', 'valor as value', 'type','name'), 
                     "file = '$cod_item' AND cod_usuario='$cod_usuario'"
             );
         }
         
-        if(empty($var)) $var = $this->conf->selecionar(array('cod_conf', 'value', 'type'), "file = '$cod_item'");
+        if(empty($var)) $var = $this->conf->selecionar(array('cod_conf', 'value', 'type', 'name'), "file = '$cod_item'");
         foreach($var as $v){
+            $val = getConstantValue($v["name"]);
+            if($val === ""){$val = $v['value'];}
+            if(is_bool($val)){$val = ($val === true)?'true':'false';}
             if($v['type'] == 'enum'){
-                $out["__".$v['cod_conf']] = $v['value'];
+                $out["__".$v['cod_conf']] = $val;
             }
-            $out[$v['cod_conf']] = $v['value'];
+            $out[$v['cod_conf']] = $val;
+            
         }
-        
         return $out;
     }
     
