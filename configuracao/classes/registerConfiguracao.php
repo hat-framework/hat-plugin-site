@@ -20,7 +20,7 @@ class registerConfiguracao extends classes\Classes\Object{
     }
     
     public function register($type, $plugin, $cod_plugin = ""){
-        if(!$this->LoadConfigClass($type, $plugin)) {return false;}
+        if(!$this->LoadConfigClass($type, $plugin)) {return true;}
         if(!$this->init($type, $cod_plugin)) { return false;}
         if($type == 'plugin') $this->cfile->initPlugin($plugin, $cod_plugin);
         foreach($this->files as $path => $arr){
