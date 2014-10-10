@@ -109,8 +109,8 @@ class site_menuModel extends \classes\Model\Model {
         
         $prepared    = $this->mountBreadscrumb($action['breadscrumb'], $obj);
         
-        $breadscrumb = \classes\Component\Component::displayPathLinks($prepared, false);
-        EventTube::addEvent('body-top', $breadscrumb);
+        $breadcrumb = \classes\Component\Component::displayPathLinks($prepared, false);
+        EventTube::addEvent('breadcrumb', $breadcrumb);
     }
     
     private function mountBreadscrumb($breadscrumb, $obj){
