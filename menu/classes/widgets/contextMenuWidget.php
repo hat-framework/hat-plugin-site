@@ -10,10 +10,13 @@ class contextMenuWidget extends \classes\Component\widget{
         if(empty($itens)) {return '';}
         $class = 'nav nav-pills submenu';
         $id    = '';
+        $li    = 'sublink dropdown';
+        $lione = 'levelone';
         $data = classes\Classes\Template::getClass('contextmenu');
         if($data !== "" && is_array($data)){extract($data);}
         $this->LoadJsPlugin('menu/menu', 'mn')
-                ->setLiClass('sublink dropdown')
+                ->setLiClass($li)
+                ->setLiOneClass($lione)
                 ->draw($itens, $class, $id);
     }
 }
