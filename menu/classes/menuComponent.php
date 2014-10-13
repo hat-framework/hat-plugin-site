@@ -49,9 +49,17 @@ class menuComponent extends classes\Component\Component{
             });
         ");
         
-        parent::form($model);
-        parent::listInTable($model, $itens, $title, $class, $drawHeaders, $header);
+        $this->gui->opendiv('site_menu_form','col-xs-12 col-sm-6 col-md-5 col-lg-4');
+            parent::form($model);
+        $this->gui->closediv();
+        $this->gui->opendiv('site_menu_table','col-xs-12 col-sm-6 col-md-7 col-lg-8');
+            parent::listInTable($model, $itens, $title, $class, $drawHeaders, $header);
+        $this->gui->closediv();
+    }
+    
+    public function format_icon($dados){
+        if($dados === ""){return;}
+        return "<i class='$dados'></i>";
     }
     
 }
-?>

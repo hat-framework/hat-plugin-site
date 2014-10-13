@@ -20,6 +20,7 @@ class configuracaoController extends \classes\Controller\Controller{
         $item = $this->gr->getItem($cod);
         if(empty($item)) Redirect (LINK);
         $this->registerVar('grupo', $item);
+        $this->registerVar('configuracoes', $this->menu);
         $this->registerVar('files', $this->model->LoadFiles($cod));
         $this->display(LINK ."/group");
     }

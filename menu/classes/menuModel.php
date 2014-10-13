@@ -45,7 +45,7 @@ class site_menuModel extends \classes\Model\Model {
                 if(!empty($var)) return $var;
             }
         }
-        $menu_db = $this->selecionar(array('menu', 'url', 'menuid', 'pai'), '', '','', "ordem ASC");
+        $menu_db = $this->selecionar(array('menu', 'url', 'menuid', 'pai', 'icon'), '', '','', "ordem ASC");
         $mn = new \classes\Component\menuBuilder($menu_db);
         $mn->setNomePai('pai');
         $mn->setMenuId('menuid');

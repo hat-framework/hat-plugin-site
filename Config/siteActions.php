@@ -24,6 +24,14 @@ class siteActions extends Actions{
             'default'   => 'n',
         ),
     );
+    
+    public function __construct(){
+        $same = array('site/configuracao/index', 'site/index/log', 'site/index/cache' ,'site/configuracao/group');
+        foreach($same as $action){
+            $this->actions[$action]['menu'] = $this->actions['site/menu/index']['menu'];
+        }
+    }
+    
     protected $actions = array(
         
         'site/index/index' => array(
@@ -32,11 +40,22 @@ class siteActions extends Actions{
             'menu' => array('site/index/index')
         ),
         
-        
-        
         'site/menu/index' => array(
             'label' => 'Itens do Menu', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarMenu',
+            'menu' => array(
+                'Central de Aplicativos'     => 'plugins/plug',
+                "Logs" => array(
+                    'Arquivos de Log'          => 'site/index/log',
+                    'Logs de Acesso'           => 'usuario/acesso/report',
+                ),
+                'Opções' => array(
+                    '__icon'                   => 'fa fa-cog',
+                    'Menu Superior'            => 'site/menu/index',
+                    'Arquivos de Configuração' => 'site/conffile/index',
+                    'Arquivos de Cache'        => 'site/index/cache',
+                 )                     
+             ),
             'breadscrumb' => array('site/configuracao/index','site/menu/index')
         ),
         'site/menu/formulario' => array(
@@ -55,7 +74,7 @@ class siteActions extends Actions{
         
         
         'site/confgrupo/index' => array(
-            'label' => 'Todas os Grupos', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
+            'label' => 'Todos os Grupos', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles',
             'menu' => array('site/index/index')
         ),
@@ -94,28 +113,26 @@ class siteActions extends Actions{
         'site/conffile/index' => array(
             'label' => 'Arquivos de Configuração', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles',
-            'menu' => array(
-                'Voltar'       => 'site/index/index',
-                'Novo Arquivo' => 'site/conffile/formulario',
-             )
+            'menu' => array('Novo Arquivo' => 'site/conffile/formulario'),
+            'breadscrumb' => array('site/configuracao/index','site/conffile/index')
         ),
         
         'site/conffile/formulario' => array(
             'label' => 'Criar Arquivo de Configurações', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles', 
-            'menu' => array('Voltar' => 'site/confgrupo/show')
+            'breadscrumb' => array('site/configuracao/index','site/conffile/index', 'site/conffile/formulario')
         ),
         
         'site/conffile/edit' => array(
             'label' => 'Editar Arquivo de Configurações', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles', 'needcod' => true,
-            'menu' => array('Voltar' => 'site/conffile/show')
+            'breadscrumb' => array('site/configuracao/index','site/conffile/index', 'site/conffile/show', 'site/conffile/edit')
         ),
         
         'site/conffile/apagar' => array(
             'label' => 'Apagar Arquivo de Configurações', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles', 'needcod' => true,
-            'menu' => array('Voltar' => 'site/conffile/show')
+            'breadscrumb' => array('site/configuracao/index','site/conffile/index', 'site/conffile/show', 'site/conffile/apagar')
         ),
         'site/conffile/show' => array(
             'label' => 'Visualizar Arquivo de Configuração', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
@@ -127,7 +144,8 @@ class siteActions extends Actions{
                     'site/conffile/edit',
                     'site/conffile/apagar'
                 )
-             )
+             ),
+            'breadscrumb' => array('site/configuracao/index','site/conffile/index', 'site/conffile/show')
         ),
         
         
@@ -149,13 +167,13 @@ class siteActions extends Actions{
         'site/conf/edit' => array(
             'label' => 'Editar Configuração', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles', 'needcod' => true,
-            'menu' => array('Voltar' => 'site/conffile/show')
+            'breadscrumb' => array('site/configuracao/index','site/conffile/index', 'site/conffile/show', 'site/conf/edit')
         ),
         
         'site/conf/apagar' => array(
             'label' => 'Apagar Configuração', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles', 'needcod' => true,
-            'menu' => array('Voltar' => 'site/conffile/show')
+            'breadscrumb' => array('site/configuracao/index','site/conffile/index', 'site/conffile/show', 'site/conf/apagar')
         ),
         'site/conf/show' => array(
             'label' => 'Visualizar Configuração', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
@@ -174,42 +192,23 @@ class siteActions extends Actions{
         'site/configuracao/index' => array(
             'label' => 'Todas as Configurações', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteAlterarConfiguracao', 'needcod' => true,
-            'menu' => array(
-                'Central de Aplicativos'     => 'plugins/plug',
-                "Logs" => array(
-                    'Arquivos de Log'          => 'site/index/log',
-                    'Logs de Acesso'           => 'usuario/acesso/report',
-                ),
-                'Avançado' => array(
-                    'Menu Superior'            => 'site/menu/index',
-                    'Arquivos de Configuração' => 'site/conffile/index',
-                    'Arquivos de Cache'        => 'site/index/cache',
-                 )                     
-             )
         ),
         
         'site/index/log' => array(
             'label' => 'Log do sistema', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles', 'needcod' => true,
-            'menu' => array(
-                'site/index/cache'
-             ),
             'breadscrumb' => array('site/configuracao/index', 'site/index/log'),
         ),
         
         'site/index/cache' => array(
             'label' => 'Cache do sistema', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles', 'needcod' => true,
-            'menu' => array(
-                'site/index/log'
-             ),
             'breadscrumb' => array('site/configuracao/index', 'site/index/cache'),
         ),
         
         'site/configuracao/group' => array(
             'label' => 'Grupo de Configurações', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteAlterarConfiguracao', 'needcod' => true,
-            'menu' => array('Central de Aplicativos'     => 'plugins/plug'),
             'breadscrumb' => array('site/configuracao/index', 'site/configuracao/group'),
         ),
         

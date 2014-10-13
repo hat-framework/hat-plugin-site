@@ -62,6 +62,14 @@ class site_menuData extends \classes\Model\DataModel{
             'grid' => true,
             'display' => true,
          ),
+       
+        'icon' => array(
+            'name'    => 'Ícone',
+            'type'    => 'varchar',
+            'size'    => '32',
+            'grid'    => true,
+            'display' => true,
+         ),
         
          'ordem' => array(
             'name'  => 'Ordem',
