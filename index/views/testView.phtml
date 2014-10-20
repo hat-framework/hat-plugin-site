@@ -38,7 +38,7 @@ angular.module('tutorialApp', ['ngAnimate', 'ngSanitize']).controller('tutorialI
 <img src="<?php echo URL."/plugins/site/index/views/";?>mrgrana.png" class="pull-left"/>
 
 <div ng-app="tutorialApp" ng-controller="tutorialInicioCtrl">
-    <div class='span3 widget'>
+    <div class='col-xs-3 widget'>
         <div class="breadcrumb"><a href="" ng-repeat="d in depth" ng-click="nextStep(d.target)">{{d.title}}</a></div>
         <h4>{{step.title}}</h4>
         <div class='text' ng-bind-html='step.text'></div>

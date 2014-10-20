@@ -4,12 +4,12 @@
     }
 </style>
 
-<div class='span3 border' id="divmenu">
+<div class='col-xs-3 border' id="divmenu">
     <h4><?php echo $title; ?></h4>
     <?php if($dropUrl != "") echo $this->Html->MakeLink($dropUrl, "Apagar Arquivo", 'btn btn-error'); ?>
     <?php $this->LoadClassFromPlugin("site/index/indexFileManagerComponent", 'ifmc')->showMenu($files, $base_url);?>
 </div>
-<div class='logcontent span9 pull-right'>
+<div class='logcontent col-xs-9 pull-right'>
     <?php if($filesrc !== ""){
      echo nl2br(file_get_contents($filesrc));
     }?>
