@@ -9,10 +9,11 @@ class contextMenuWidget extends \classes\Component\widget{
     protected function draw($itens){
         if(empty($itens)) {return '';}
         $class = 'nav nav-pills submenu';
-        $id    = '';
         $li    = 'sublink dropdown';
         $lione = 'levelone';
+        $id    = $this->id;
         $data = classes\Classes\Template::getClass('contextmenu');
+        if($this->id !== ""){$id = $this->id;}
         if($data !== "" && is_array($data)){extract($data);}
         $this->LoadJsPlugin('menu/menu', 'mn')
                 ->setLiClass($li)
