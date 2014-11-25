@@ -98,32 +98,50 @@ class site_menuModel extends \classes\Model\Model {
     }
     
     public function setBreadscrumb(){
-        $class = CURRENT_MODULE."Actions";
-        $file = classes\Classes\Registered::getPluginLocation(CURRENT_MODULE, true).DS."Config".DS."$class.php";
-        if(!file_exists($file)) {return;}
-        require_once $file;
-        $obj         = new $class();
+        $obj         = $this->getPluginActions(CURRENT_MODULE);
         $act         = CURRENT_MODULE . "/". CURRENT_CONTROLLER . "/" . CURRENT_ACTION;
         $action      = $obj->getAction($act);
         if(!isset($action['breadscrumb'])) return;
         
-        $prepared    = $this->mountBreadscrumb($action['breadscrumb'], $obj);
+        $prepared    = $this->mountBreadscrumb($action['breadscrumb']);
         
         $breadcrumb = \classes\Component\Component::displayPathLinks($prepared, false);
         EventTube::addEvent('breadcrumb', $breadcrumb);
     }
     
-    private function mountBreadscrumb($breadscrumb, $obj){
+    private $temp = array();
+    private function getPluginActions($plugin){
+        if(isset($this->temp[$plugin])){return $this->temp[$plugin];}
+        $class = $plugin."Actions";
+        $file  = classes\Classes\Registered::getPluginLocation($plugin, true).DS."Config".DS."$class.php";
+        if(!file_exists($file)) {
+            $this->temp[$plugin] = null;
+            return $this->temp[$plugin];
+        }
+        require_once $file;
+        $this->temp[$plugin] = new $class();
+        return $this->temp[$plugin];
+    }
+    
+    private function mountBreadscrumb($breadscrumb){
         $prepared = array();
         foreach($breadscrumb as $i => $bs){
-            $arr   = $obj->getAction($bs);
-            if(empty($arr)) continue;
+            $arr   = $this->getAction($bs);
+            if(empty($arr)){continue;}
             $this->discoverModel($bs);
             $label = $this->getLabel($arr, $i, $bs);
             $url   = $this->getUrl($arr, $bs);
             $prepared[ucfirst($label)] = $url;
+            
         }
         return $prepared;
+    }
+    
+    private function getAction($action){
+        $temp = explode("/", $action);
+        $obj  = $this->getPluginActions($temp[0]);
+        if(!is_object($obj)){return array();}
+        return $obj->getAction($action);
     }
     
     private $curModel = "";
