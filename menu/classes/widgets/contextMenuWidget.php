@@ -3,6 +3,7 @@
 class contextMenuWidget extends \classes\Component\widget{
         
     protected function getItens(){
+        if(!defined('CURRENT_MODULE') || !defined('CURRENT_PAGE')){return array();}
         return $this->LoadModel('plugins/action', 'act')->geraMenu(CURRENT_MODULE, CURRENT_PAGE, false);
     }
     
