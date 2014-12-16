@@ -1,20 +1,20 @@
 <?php
 
 use classes\Classes\EventTube;
-use classes\Classes\cookie;
+use classes\Classes\session;
 class site_menuModel extends \classes\Model\Model {
 
     public $tabela = "site_menu";
     public $pkey   = "cod_menu";
 
     public function inserir($dados) {
-        cookie::destroy($this->cookiename);
+        session::destroy($this->cookiename);
         if(isset($dados['menu'])) {$dados['menuid'] = GetPlainName($dados['menu']);}
         return parent::inserir($dados);
     }
     
     public function editar($id, $post, $camp = "") {
-        cookie::destroy($this->cookiename);
+        session::destroy($this->cookiename);
         if((!isset($post['menuid']) || trim($post['menuid']) === "") && isset($post['menu'])){
             $post['menuid'] = GetPlainName($post['menu']);
         }
@@ -40,8 +40,8 @@ class site_menuModel extends \classes\Model\Model {
         $this->LoadModel('usuario/login', 'uobj');
         $is = $this->uobj->UserIsWebmaster();
         if(!$is){
-            if(cookie::cookieExists($this->cookiename)){
-                $var = cookie::getVar($this->cookiename);
+            if(session::exists($this->cookiename)){
+                $var = session::getVar($this->cookiename);
                 if(!empty($var)) return $var;
             }
         }
@@ -50,7 +50,7 @@ class site_menuModel extends \classes\Model\Model {
         $mn->setNomePai('pai');
         $mn->setMenuId('menuid');
         $var = $mn->geraMenu();
-        if(!$is) cookie::setVar($this->cookiename, $var);
+        if(!$is) session::setVar($this->cookiename, $var);
         return $var;
     }
     
