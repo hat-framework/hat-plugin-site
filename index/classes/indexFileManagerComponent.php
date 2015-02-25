@@ -4,7 +4,7 @@ class indexFileManagerComponent extends classes\Component\Component{
     
     public function showMenu($array, $base_url){
         $this->LoadJsPlugin('menu/treeview', 'tv');
-        ksort($array);
+        asort($array);
         echo "<div class='treeview'>";
         $this->displayMenu($array, $base_url);
         echo "</div>";
