@@ -20,7 +20,7 @@ class indexFileManagerComponent extends classes\Component\Component{
                 continue;
             }
             echo "<li>$folder<ul>";
-            ksort($file);
+            asort($file);
             $this->displayMenu($file, "$base_url/$folder");
             echo "</ul></li>";
         }
