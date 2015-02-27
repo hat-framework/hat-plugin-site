@@ -4,7 +4,7 @@ class indexFileManagerComponent extends classes\Component\Component{
     
     public function showMenu($array, $base_url){
         $this->LoadJsPlugin('menu/treeview', 'tv');
-        asort($array);
+        ksort($array);
         echo "<div class='treeview'>";
         $this->displayMenu($array, $base_url);
         echo "</div>";
@@ -20,7 +20,8 @@ class indexFileManagerComponent extends classes\Component\Component{
                 continue;
             }
             echo "<li>$folder<ul>";
-            asort($file);
+            if(is_array(end($file))){krsort($file);}
+            else{arsort($file);}
             $this->displayMenu($file, "$base_url/$folder");
             echo "</ul></li>";
         }
