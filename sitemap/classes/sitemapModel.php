@@ -11,6 +11,7 @@ class site_sitemapModel extends \classes\Model\Model {
             $class   = "{$plugname}Actions";
             $arquivo = $plugfolder . "/Config/$class.php";
             if(!file_exists($arquivo)){continue;}
+            $this->LoadConfigFromPlugin($plugname);
             require_once $arquivo;
             $obj = new $class();
             $actions = $obj->getActions();
@@ -39,58 +40,3 @@ class site_sitemapModel extends \classes\Model\Model {
     }
     
 }
-/*
-This XML file does not appear to have any style information associated with it. The document tree is shown below.
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>http://institucional.webmotors.com.br/quem-somos</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>http://institucional.webmotors.com.br/imprensa</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>
-http://institucional.webmotors.com.br/como-anunciar
-</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>
-http://institucional.webmotors.com.br/porque-anunciar
-</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>
-http://institucional.webmotors.com.br/quem-pode-anunciar
-</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>http://institucional.webmotors.com.br/formatos</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>
-http://institucional.webmotors.com.br/perfil-de-audiencia
-</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-<url>
-<loc>http://institucional.webmotors.com.br/contato</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
-</urlset>
- * 
- * 
- *  */

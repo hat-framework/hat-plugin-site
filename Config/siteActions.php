@@ -23,6 +23,13 @@ class siteActions extends Actions{
                 webmaster, admin e usuário",
             'default'   => 'n',
         ),
+        
+        'siteGerenciarGadgets' => array(
+            'nome'      => "site_gadget",
+            'label'     => "Gerenciar Gadgets",
+            'descricao' => "Permite adicionar novos gadgets em qualquer plugin",
+            'default'   => 'n',
+        ),
     );
     
     public function __construct(){
