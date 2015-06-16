@@ -36,15 +36,21 @@ class registerConfiguracao extends classes\Classes\Object{
     
     private function LoadConfigClass($type, $plugin){
      
+        //carrega arquivos de configuração
+        if($type === "resource"){$this->LoadConfigFromResource($plugin);}
+        elseif($type === 'plugin'){$this->LoadConfigFromPlugin($plugin);}
+        
         //recupera as informações do arquivo
         $file = $class = "";
         $this->getFileName($plugin, $type, $class, $file);
+        
         //carrega o arquivo
         if(!file_exists($file)) {return false;}
         require_once $file;
 
         //carrega a classe
         if(!class_exists($class)) {return false;}
+        
         $this->obj = new $class();
         if(!$this->obj instanceof \classes\Classes\Options) {
             $this->setErrorMessage("A classe $class não é uma instância da classe Options.");
