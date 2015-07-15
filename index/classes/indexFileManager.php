@@ -15,8 +15,10 @@ class indexFileManager extends classes\Classes\Object{
     }
     
     public function getFiles(&$tree, $folder = ""){
-        $pasta   = ($folder == "")?$this->dir:"$this->dir".DS.$folder;
-        return $this->dobj->getDirectoryTree($tree, $pasta);
+        $pasta          = ($folder == "")?$this->dir:"$this->dir".DS.$folder;
+        $current_folder = $pasta . filter_input(INPUT_GET, 'folder');
+        getTrueDir($current_folder);
+        return $this->dobj->getDirectoryTreeFolders($tree, $current_folder, $pasta);
     }
 
     public function show(){
