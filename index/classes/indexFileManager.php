@@ -26,12 +26,31 @@ class indexFileManager extends classes\Classes\Object{
     }
     
     public function drop($type){
-        $input  = filter_input(INPUT_GET, 'file');
         $action = filter_input(INPUT_GET, 'action');
         if($action != 'drop'){return;}
-        $dir    = $this->dir.DS.$input;
-        $this->dobj->remove($dir);
-        Redirect("site/index/$type");
+        
+        $input  = filter_input(INPUT_GET, 'file');
+        getTrueDir($input);
+        if($input !== ""){
+            $e      = explode(DS, $input);
+            array_pop($e);
+            $ff     = implode(DS, $e);
+            $dir    = $this->dir.DS.$input;
+            $this->dobj->remove($dir);
+            return Redirect(URL."index.php?url=site/index/$type&folder=$ff");
+        }
+        
+        $folder  = filter_input(INPUT_GET, 'folder');
+        getTrueDir($folder);
+        if($folder !== ""){
+            $e      = explode(DS, $folder);
+            array_pop($e);
+            $ff     = implode(DS, $e);
+            $dir    = $this->dir.DS.$folder;
+            getTrueDir($dir);
+            $this->dobj->remove($dir);
+            return Redirect(URL."index.php?url=site/index/$type&folder=$ff");
+        }
     }
 
     public function getUrls($type){
@@ -41,7 +60,7 @@ class indexFileManager extends classes\Classes\Object{
             $out['filesrc'] = $this->dir.DS.$input;
             $out['drop']    = $this->html->getLink("site/index/$type&file=$input&action=drop", true, true);
         }
-        $out['base']        = $this->html->getLink("site/index/$type&file=", true, true);
+        $out['base']        = $this->html->getLink("site/index/$type", true, true);
         getTrueDir($out['filesrc']);
         //print_r($out); die($this->dir);
         return $out;

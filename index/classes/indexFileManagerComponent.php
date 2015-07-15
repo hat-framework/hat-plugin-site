@@ -12,18 +12,22 @@ class indexFileManagerComponent extends classes\Component\Component{
     
     public function displayMenu($array, $base_url, $folderr = ''){
         if(empty($array)) {return "";}
-        $current_folder = filter_input(INPUT_GET, 'folder');
-        $current_file   = filter_input(INPUT_GET, 'file');
         echo "<ul>";
         foreach($array as $folder => $file){
             if(!is_array($file)) {
-                if($current_folder!= "$folderr" && $current_file != "$folderr/$file"){continue;}
-                $url = $base_url . "$folderr/$file";
-                echo "<li><a href='$url'>$file</a></li>";
+                $url = "$base_url&folder=$folderr&file=$folderr/$file";
+                $dropfolderlink = URL."index.php?url=site/index/log&file=$folderr/$file&action=drop";
+                echo "<li><a href='$url'>$file</a>"
+                      . " <a href='$dropfolderlink' onclick='return confirm(\"Deseja apagar este arquivo?\")'><i class='fa fa-times'></i></a>"
+                      . "</li>";
                 continue;
             }
-            $url = $base_url . "&folder=$folderr/$folder";
-            echo "<li><a href='$url'>$folder</a><ul>";
+            
+            $urlfolder = $base_url . "&folder=$folderr/$folder";
+            $dropfolderlink = URL."index.php?url=site/index/log&file=&folder=$folderr/$folder&action=drop";
+            echo "<li><a href='$urlfolder'>$folder</a>"
+                    . "<a href='$dropfolderlink' onclick='return confirm(\"Deseja apagar esta pasta?\")'><i class='fa fa-times'></i></a>"
+                    . "<ul>";
             if(is_array(end($file))){krsort($file);}
             else{arsort($file);}
             $this->displayMenu($file, $base_url, "$folderr/$folder");

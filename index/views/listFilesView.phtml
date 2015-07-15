@@ -6,7 +6,6 @@
 
 <div class='col-xs-3 border' id="divmenu">
     <h4><?php echo $title; ?></h4>
-    <?php if($dropUrl != "") echo $this->Html->MakeLink($dropUrl, "Apagar Arquivo", 'btn btn-error'); ?>
     <?php $this->LoadClassFromPlugin("site/index/indexFileManagerComponent", 'ifmc')->showMenu($files, $base_url);?>
 </div>
 <div class='logcontent col-xs-9 pull-right'>
