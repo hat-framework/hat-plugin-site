@@ -116,8 +116,6 @@ class site_confData extends \classes\Model\DataModel{
 	    'notnull' => true,
 	    'grid'    => true,
             'display' => true,
-            'especial' => 'session',
-            'session'  => 'site/conffile',
 	    'fkey' => array(
 	        'model' => 'site/conffile',
 	        'cardinalidade' => '1n',
@@ -129,5 +127,3 @@ class site_confData extends \classes\Model\DataModel{
         'button'     => array('button' => 'Gravar Configuracao'),
     );
 }
-
-?>

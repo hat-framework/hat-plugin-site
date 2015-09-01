@@ -68,8 +68,6 @@ class site_conffileData extends \classes\Model\DataModel{
 	    'notnull' => true,
 	    'grid'    => true,
             'display' => true,
-            'especial' => 'session',
-            'session'  => 'site/confgrupo',
 	    'fkey' => array(
 	        'model' => 'site/confgrupo',
 	        'cardinalidade' => '1n',
