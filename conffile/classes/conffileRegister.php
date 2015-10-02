@@ -110,7 +110,9 @@ class conffileRegister extends classes\Classes\Object{
         $exp      = explode("/", $dados['path']);
         $subdir   = array_shift($exp);
         //$filename = end($exp);
-        $location = DIR_CONFIG_SUBDOMAIN . $dados['type']."/";
+        
+        $type     = (strpos($dados['path'], "config/")!== false)?'config':$dados['type'];
+        $location = DIR_CONFIG_SUBDOMAIN . "$type/";
         getTrueDir($location);
         $this->LoadResource('files/dir', 'dobj');
         //die($location);
@@ -128,7 +130,8 @@ class conffileRegister extends classes\Classes\Object{
         $exp      = explode("/", $dados['path']);
         $subdir   = array_shift($exp);
         $filename = end($exp);
-        $location = DIR_CONFIG_SUBDOMAIN . $dados['type']."/$subdir/$filename.php";
+        $type     = (strpos($dados['path'], "config/")!== false)?'config':$dados['type'];
+        $location = DIR_CONFIG_SUBDOMAIN . "$type/$subdir/$filename.php";
         $str      = $this->getStr($configs, $dados);
         if(false === $this->fobj->savefile($location, $str)){
             $this->setMessages($this->fobj->getMessages());

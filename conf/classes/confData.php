@@ -97,16 +97,16 @@ class site_confData extends \classes\Model\DataModel{
         
         'value' => array(
 	    'name'     => 'Valor',
-	    'type'     => 'varchar',
-	    'size'     => '256',
+	    'type'     => 'text',
+	    //'size'     => '256',
 	    'grid'    => true,
 	    'display' => true,
         ),
         
         'value_default' => array(
 	    'name'     => 'Valor Default',
-	    'type'     => 'varchar',
-	    'size'     => '256',
+	    'type'     => 'text',
+	    //'size'     => '256',
 	    'private'  => true,
         ),
 
