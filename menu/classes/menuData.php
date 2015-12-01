@@ -75,7 +75,6 @@ class site_menuData extends \classes\Model\DataModel{
             'name'  => 'Ordem',
             'type'  => 'int',
             'size'  => '5',
-            'private' => true,
             'grid'  => true,
             'display' => true,
          )
