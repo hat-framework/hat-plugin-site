@@ -147,6 +147,9 @@ class site_menuModel extends \classes\Model\Model {
     private $curModel = "";
     private function getUrl($arr, $bs){
         if(!isset($arr['needcod']) || !$arr['needcod']) return $bs;
+        if(isset($_SESSION[$this->curModel]) && is_array($_SESSION[$this->curModel])){
+            $_SESSION[$this->curModel] = implode("/", $_SESSION[$this->curModel]);
+        }
         $val = (isset($_SESSION[$this->curModel]))?"/{$_SESSION[$this->curModel]}":"";
         return $bs . $val;
     }
