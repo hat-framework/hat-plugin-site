@@ -16,6 +16,11 @@ class webserviceController extends CController{
     public function execute(){
         $class       = array_shift($this->vars);
         if($class == ""){die("Falha ao executar webservice! Não informado!");}
+        if(is_numeric($class)){
+            $item = $this->model->getItem($class);
+            if(empty($item)){die("Falha ao executar webservice! Não informado!");}
+            $class = $item['class'];
+        }
         $bool = $this->executeService($class, $this->vars);
         $this->registerVar("status", ($bool)?"1":'0');
         $this->display('');
