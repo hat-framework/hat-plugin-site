@@ -54,7 +54,7 @@ class siteActions extends Actions{
                     'Menu Superior'            => 'site/menu/index',
                     'Arquivos de Configuração' => 'site/conffile/index',
                     'Arquivos de Cache'        => 'site/index/cache',
-                    'Webservices'              => 'site/webservices/index',
+                    'Webservices'              => 'site/webservice/index',
                  )                     
              ),
             'breadscrumb' => array('site/configuracao/index','site/menu/index')
