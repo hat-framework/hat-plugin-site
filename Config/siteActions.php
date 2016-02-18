@@ -223,10 +223,16 @@ class siteActions extends Actions{
             'breadscrumb' => array('site/configuracao/index', 'site/webservice/index')
         ),
         
-        'site/webservice/execute' => array(
+        'site/webservice/executeAll' => array(
             'label' => 'Executar Webservices', 'publico' => 's', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles',
             'breadscrumb' => array('site/configuracao/index', 'site/webservice/index', 'site/webservice/execute')
+        ),
+        
+        'site/webservice/execute' => array(
+            'label' => 'Executar', 'publico' => 's', 'default_yes' => 's','default_no' => 'n',
+            'permission' => 'siteGerenciarConfFiles',
+            'breadscrumb' => array('site/configuracao/index', 'site/webservice/index', 'site/webservice/executeAll')
         ),
         
         'site/webservice/formulario' => array(

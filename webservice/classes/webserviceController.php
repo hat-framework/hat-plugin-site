@@ -3,14 +3,21 @@
 class webserviceController extends CController{
     public $model_name = 'site/webservice';
     
-    public function execute(){
-        $webservices = array();
-        $class       = array_shift($this->vars);
-        if($class != ""){
-            $bool = $this->executeService($class, $this->vars);
-            $this->registerVar("status", ($bool)?"1":'0');
+    public function executeAll(){
+        $webservices = $this->model->selecionar();
+        $url         = $this->LoadResouce('html', 'html')->getLink('site/webservice/execute', true, true);
+        foreach($webservices as $webservice){
+            $ws = str_replace("/", "|", $webservice['class']);
+            simple_curl("$url/$ws&ajax=1");
         }
-        else{$this->executeAllWebServices($class, $webservices);}
+        $this->display('');
+    }
+    
+    public function execute(){
+        $class       = array_shift($this->vars);
+        if($class == ""){die("Falha ao executar webservice! Não informado!");}
+        $bool = $this->executeService($class, $this->vars);
+        $this->registerVar("status", ($bool)?"1":'0');
         $this->display('');
     }
     
@@ -24,14 +31,5 @@ class webserviceController extends CController{
                     $this->registerVar('erro', $ex->getMessage());
                     return false;
                 }
-            }
-    
-            private function executeAllWebServices($webservices){
-                $url = $this->LoadResouce('html', 'html')->getLink('site/webservice/execute');
-                foreach($webservices as $webservice){
-                    $webservice = str_replace("/", "|", $webservice);
-                    simple_curl("$url/$webservice");
-                }
-                return true;
             }
 }
