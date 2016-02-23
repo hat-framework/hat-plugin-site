@@ -37,4 +37,17 @@ class indexController extends \classes\Controller\Controller{
         getTrueDir($dir);
         $this->display(LINK.'/listFiles');
     }
+    
+    public function rdct(){
+        $out = array();
+        foreach($_GET as $name => $val){
+            if($name == 'link' || $name == 'url' ){continue;}
+            $out[] = "$name=$val";
+        }
+        $str = implode("&", $out);
+        $url = (isset($_GET['link']))?$_GET['link']:URL;
+        $var = ($str != "")?"$str":"";
+        $full = "{$url}?{$var}";
+        SRedirect("http://$full");
+    }
 }

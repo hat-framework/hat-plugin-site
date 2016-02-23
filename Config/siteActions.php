@@ -40,6 +40,12 @@ class siteActions extends Actions{
             'menu' => array('site/index/index')
         ),
         
+        'site/index/rdct' => array(
+            'label' => 'Redirecionador', 'publico' => 's', 'default_yes' => 's','default_no' => 'n',
+            'permission' => 'siteAlterarConfiguracao',
+            'menu' => array('site/index/index')
+        ),
+        
         'site/menu/index' => array(
             'label' => 'Itens do Menu', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarMenu',
@@ -219,7 +225,7 @@ class siteActions extends Actions{
         'site/webservice/index' => array(
             'label'       => 'Todos os Webservices', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission'  => 'siteGerenciarConfFiles',
-            'menu'        => array('site/webservice/execute'),
+            'menu'        => array('site/webservice/executeAll', 'site/webservice/formulario'),
             'breadscrumb' => array('site/configuracao/index', 'site/webservice/index')
         ),
         
