@@ -5,7 +5,7 @@ class webserviceController extends CController{
     
     public function executeAll(){
         $webservices = $this->model->selecionar();
-        $url         = $this->LoadResouce('html', 'html')->getLink('site/webservice/execute', true, true);
+        $url         = $this->LoadResource('html', 'html')->getLink('site/webservice/execute', true, true);
         foreach($webservices as $webservice){
             $ws = str_replace("/", "|", $webservice['class']);
             simple_curl("$url/$ws&ajax=1");
