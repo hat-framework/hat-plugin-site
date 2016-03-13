@@ -1,6 +1,7 @@
 <?php 
 class site_sitemapModel extends \classes\Model\Model {
     public $model_name = LINK;    
+    private $str       = '';
     public function createMap() {
         $this->LoadResource('html', 'html');
         $this->LoadModel('plugins/plug', 'plug');
@@ -23,20 +24,34 @@ class site_sitemapModel extends \classes\Model\Model {
         $this->setMessages($this->fobj->getMessages());
     }
     
-    private function mapActions($actions){
-        foreach($actions as $url => $action){
-            if(!isset($action['publico']) || $action['publico'] === 'n'){continue;}
-            if(isset($action['noindex'])  && $action['noindex'] === 's'){continue;}
-            if(!isset($action['needcod']) || $action['needcod'] === false){
-                $this->addAction($url);
+            private function mapActions($actions){
+                foreach($actions as $url => $action){
+                    if(!isset($action['publico']) || $action['publico'] === 'n'){continue;}
+                    if(isset($action['noindex'])  && $action['noindex'] === 's'){continue;}
+                    if(!isset($action['needcod']) || $action['needcod'] === false){
+                        $this->addAction($url);
+                    }
+                }
             }
-        }
-    }
     
-    private $str = '';
-    private function addAction($url){
-        $url = $this->html->getLink($url);
-        $this->str .= "<url><loc>$url</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>";
-    }
+                private function addAction($url){
+                    $this->prepareUrl($url);
+                    $link = $this->html->getLink($url);
+                    $this->str .= "<url><loc>$link</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>";
+                }
+                
+                private function prepareUrl(&$url){
+                    $e  = explode("/", $url);
+                    if($e[0] == 'index' && $e[1] == 'index'){$url = $e[2];}
+                    if($e[2] != 'index'){return;}
+                    $e[2] = "";
+                    $url  = "{$e[0]}/{$e[1]}";
+                    if($e[1] != 'index'){return;}
+                    $e[1] = "";
+                    $url  = "{$e[0]}";
+                    if($e[0] != 'index'){return;}
+                    $e[0] = "";
+                    $url  = "";
+                }
     
 }

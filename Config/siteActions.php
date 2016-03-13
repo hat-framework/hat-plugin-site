@@ -224,32 +224,32 @@ class siteActions extends Actions{
         
         'site/webservice/index' => array(
             'label'       => 'Todos os Webservices', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
-            'permission'  => 'siteGerenciarConfFiles',
+            'permission'  => 'siteGerenciarConfFiles', 'noindex' => 's',
             'menu'        => array('site/webservice/executeAll', 'site/webservice/formulario'),
             'breadscrumb' => array('site/configuracao/index', 'site/webservice/index')
         ),
         
         'site/webservice/executeAll' => array(
             'label' => 'Executar Webservices', 'publico' => 's', 'default_yes' => 's','default_no' => 'n',
-            'permission' => 'siteGerenciarConfFiles',
+            'permission' => 'siteGerenciarConfFiles', 'noindex' => 's',
             'breadscrumb' => array('site/configuracao/index', 'site/webservice/index', 'site/webservice/execute')
         ),
         
         'site/webservice/execute' => array(
             'label' => 'Executar', 'publico' => 's', 'default_yes' => 's','default_no' => 'n',
-            'permission' => 'siteGerenciarConfFiles',
+            'permission' => 'siteGerenciarConfFiles', 'noindex' => 's',
             'breadscrumb' => array('site/configuracao/index', 'site/webservice/index', 'site/webservice/executeAll')
         ),
         
         'site/webservice/formulario' => array(
             'label' => 'Criar Webservice', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
-            'permission' => 'siteGerenciarConfFiles', 
+            'permission' => 'siteGerenciarConfFiles', 'noindex' => 's', 
             'breadscrumb' => array('site/configuracao/index', 'site/webservice/index', 'site/webservice/formulario')
         ),
         
         'site/webservice/show' => array(
             'label' => 'Visualizar Webservice', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
-            'permission' => 'siteGerenciarConfFiles', 'needcod' => true,
+            'permission' => 'siteGerenciarConfFiles', 'noindex' => 's', 'needcod' => true,
             'breadscrumb' => array('site/configuracao/index', 'site/webservice/index', 'site/webservice/show'),
             'menu' => array(
                 'site/webservice/execute',
@@ -262,13 +262,13 @@ class siteActions extends Actions{
         
         'site/webservice/edit' => array(
             'label' => 'Editar Webservice', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
-            'permission' => 'siteGerenciarConfFiles', 'needcod' => true, 
+            'permission' => 'siteGerenciarConfFiles', 'noindex' => 's', 'needcod' => true, 
             'breadscrumb' => array('site/configuracao/index', 'site/webservice/index', 'site/webservice/show', 'site/webservice/edit')
         ),
         
         'site/webservice/apagar' => array(
             'label' => 'Apagar Webservice', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
-            'permission' => 'siteGerenciarConfFiles', 'needcod' => true,
+            'permission' => 'siteGerenciarConfFiles', 'noindex' => 's', 'needcod' => true,
             'menu' => array('Voltar' => 'site/webservice/show')
         ),
         
