@@ -57,6 +57,7 @@ class siteActions extends Actions{
                 ),
                 'Opções' => array(
                     '__icon'                   => 'fa fa-cog',
+                    'Actions sem Titulo'       => 'plugins/action/troubles',
                     'Menu Superior'            => 'site/menu/index',
                     'Arquivos de Configuração' => 'site/conffile/index',
                     'Arquivos de Cache'        => 'site/index/cache',
