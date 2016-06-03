@@ -18,7 +18,7 @@ class site_menuData extends \classes\Model\DataModel{
         'menu' => array(
             'name'    => 'Nome',
             'type'    => 'varchar',
-            'size'    => '20', 
+            'size'    => '64', 
             'grid'    => true,
             'notnull' => true,
             'display' => true,
@@ -41,7 +41,7 @@ class site_menuData extends \classes\Model\DataModel{
             'name'    => 'Id',
             'type'    => 'varchar',
             'unique' => array('model'=>'site/menu'),
-            'size'    => '20', 
+            'size'    => '64', 
             'grid'    => true,
             'display' => true,
          ),
