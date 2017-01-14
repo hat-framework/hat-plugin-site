@@ -4,6 +4,8 @@ class contextMenuWidget extends \classes\Component\widget{
         
     protected function getItens(){
         if(!defined('CURRENT_MODULE') || !defined('CURRENT_PAGE')){return array();}
+		$menu = classes\Classes\EventTube::getMenuArray('body-top');
+		if(!empty($menu)){return $menu;}
         return $this->LoadModel('plugins/action', 'act')->geraMenu(CURRENT_MODULE, CURRENT_PAGE, false);
     }
     
