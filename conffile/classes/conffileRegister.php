@@ -145,7 +145,11 @@ class conffileRegister extends classes\Classes\Object{
         foreach($configs as $codc => $conff){
             $const_name = $const_value = "";
             $this->detectData($conff, $codc, $dados, $const_name,$const_value);
-            if($const_name == "") {die("Variável constname não pode ser vazia!");}
+            if($const_name == "") {
+                echoBr("$conff:conff - $codc:codc - const_value:$const_value");
+                print_rh($dados);
+                die("Variável constname não pode ser vazia!");
+            }
             //if(CURRENT_ACTION === "" && defined($const_name)){$const_value = constant($const_name);}
             if($const_value == 'true' || $const_value == 'false'){
                   $str .= "\t if(!defined('$const_name')) define('$const_name', $const_value); \n";
@@ -162,8 +166,8 @@ class conffileRegister extends classes\Classes\Object{
                 }
                 
                 foreach($dados['configs'] as $t => $data){
-                    if($codc != $data['cod_conf']) {continue;}
                     $const_name = $data['name'];
+                    if($codc != $data['cod_conf']) {continue;}
                     $const_value = $conff;
                     unset($dados[$t]);
                     break;
