@@ -35,10 +35,11 @@ class site_confgrupoData extends \classes\Model\DataModel{
             'display'       => true,
             'display_in'    => 'table',
             'fkey'      => array(
+                'refmodel'      => 'site/confgrupo',
                 'sort'          => 'title ASC',
                 'limit'         => 1000,
-                'model' 	=> 'site/conffile',
-                'keys'          => array('grupo', 'grupo'),
+                'model'         => 'site/conffile',
+                'keys'          => array('cod_confgrupo', 'grupo'),
                 'cardinalidade' => 'n1'//nn 1n 11
             )
          ),
