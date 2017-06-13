@@ -33,6 +33,10 @@ class site_configuracaoModel extends \classes\Model\Model{
                     $v['default']       = 'true';
                 }
             }
+            if(isset($v['especial']) && $v['especial'] == 'monetary' && (!isset($v['type']) || $v['type'] == "")){
+                $v['type'] = "decimal";
+                $v['size'] = '15,2';
+            }
             $out[$v['cod_conf']] = $v;
         }
         $out['button'] = array('button' => 'Salvar Configurações');

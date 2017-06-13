@@ -202,6 +202,19 @@ class siteActions extends Actions{
             'permission' => 'siteAlterarConfiguracao', 'needcod' => true,
         ),
         
+        'site/configuracao/group' => array(
+            'label' => 'Grupo de Configurações', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
+            'permission' => 'siteAlterarConfiguracao', 'needcod' => true,
+            'breadscrumb' => array('site/configuracao/index', 'site/configuracao/group'),
+        ),
+        
+        'site/configuracao/configure' => array(
+            'label' => 'Salvar configuração', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
+            'permission' => 'siteGerenciarConfFiles', 'noindex' => 's', 'needcod' => true,
+            'breadscrumb' => array('site/configuracao/index', 'site/configuracao/group', 'site/configuracao/configure'),
+        ),
+        
+        
         'site/index/log' => array(
             'label' => 'Log do sistema', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles', 'needcod' => true,
@@ -212,12 +225,6 @@ class siteActions extends Actions{
             'label' => 'Cache do sistema', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
             'permission' => 'siteGerenciarConfFiles', 'needcod' => true,
             'breadscrumb' => array('site/configuracao/index', 'site/index/cache'),
-        ),
-        
-        'site/configuracao/group' => array(
-            'label' => 'Grupo de Configurações', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
-            'permission' => 'siteAlterarConfiguracao', 'needcod' => true,
-            'breadscrumb' => array('site/configuracao/index', 'site/configuracao/group'),
         ),
         
         

@@ -1,5 +1,5 @@
 <?php 
-use classes\Classes\EventTube;
+
 class configuracaoController extends \classes\Controller\Controller{
     public $model_name = LINK;
     
