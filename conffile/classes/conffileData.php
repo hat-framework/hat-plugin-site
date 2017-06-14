@@ -79,9 +79,17 @@ class site_conffileData extends \classes\Model\DataModel {
             'default' => 'admin',
             'options' => array(
                 'usuario' => 'Usuário',
+                'permission' => 'Permissão',
                 'admin' => 'Administrador',
                 'webmaster' => 'Webmaster',
             ),
+            'grid' => true,
+            'display' => true,
+        ),
+        'permission' => array(
+            'name' => 'Permissão',
+            'type' => 'varchar',
+            'size' => '32',
             'grid' => true,
             'display' => true,
         ),

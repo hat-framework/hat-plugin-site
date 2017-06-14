@@ -6,11 +6,22 @@ class site_confgrupoModel extends \classes\Model\Model{
     public function genMenu(){
         $perm = $this->LoadModel('site/conffile', 'cf')->getPermissionArr();
         $p = "'".implode("','", $perm)."'";
+        $and = $this->getPermissionQuery();
         $this->db->Join($this->getTable(), $this->cf->getTable(), array($this->pkey), array('cod_confgrupo'), "LEFT");  
-        $var  = $this->selecionar(array(), "visibilidade IN ($p)", "", "", "type ASC, name ASC");
-        //print_rd($var);
+        $var  = $this->selecionar(array(), "visibilidade IN ($p) $and", "", "", "type ASC, name ASC");
         return $this->mountMenu($var);
     }
+    
+            private function getPermissionQuery(){
+                $data = $this->LoadModel('usuario/perfil', 'perf')->getPermissoes(usuario_loginModel::CodPerfil());
+                $and  = "";
+                if(!empty($data)){
+                    $in = implode("','", array_keys($data));
+                    $and = " OR (visibilidade = 'permission' AND permission IN('$in'))";
+                }
+                return $and;
+            }
+    
     private $cookiename = "site_cofgrupo";
     public function getGroupsOfUser($visibilidade = 'usuario'){
         $where = "";

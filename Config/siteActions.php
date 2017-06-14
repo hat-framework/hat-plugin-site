@@ -210,7 +210,7 @@ class siteActions extends Actions{
         
         'site/configuracao/configure' => array(
             'label' => 'Salvar configuração', 'publico' => 'n', 'default_yes' => 's','default_no' => 'n',
-            'permission' => 'siteGerenciarConfFiles', 'noindex' => 's', 'needcod' => true,
+            'permission' => 'siteAlterarConfiguracao', 'noindex' => 's', 'needcod' => true,
             'breadscrumb' => array('site/configuracao/index', 'site/configuracao/group', 'site/configuracao/configure'),
         ),
         

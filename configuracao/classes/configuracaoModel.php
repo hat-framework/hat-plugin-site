@@ -160,6 +160,10 @@ class site_configuracaoModel extends \classes\Model\Model{
         return $this->saveAdmin($dados, $codfile);
     }
     
+    private function savePermission($dados, $codfile){
+        return $this->saveAdmin($dados, $codfile);
+    }
+    
     private function check($dados){
         $keys  = array_keys($dados);
         $imp   = "'".implode("','", $keys)."'";
